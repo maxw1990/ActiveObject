@@ -53,6 +53,7 @@ int result;
 configure Project with dev config by choosing dev from the drop down menu.
 Or manually by using the flags:
 
+
 ```cmake
 -DCMAKE_BUILD_TYPE=Debug 
 -DAO_ENABLE_CUSTOM_INSTALL=ON 
