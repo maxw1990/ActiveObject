@@ -1,0 +1,20 @@
+cc_library(
+    name = "active-object",
+    srcs = [
+        "ActiveObject.cpp",
+        "ActiveObjectPool.cpp"
+        ],
+    hdrs = [
+        "IMessage.h",
+        "ActiveObject.h",
+        "ActiveObjectPool.h"
+        ],
+    includes = [""],
+    strip_include_prefix = "",
+    include_prefix="Pool",
+    copts = select({
+        "//conditions:default": ["-std=c++20"],
+    }),
+    #visibility = ["//main:__pkg__"],
+    visibility = ["//visibility:public"],
+)

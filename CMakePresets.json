@@ -1,0 +1,27 @@
+{
+    "version": 3,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 22,
+        "patch": 0
+    },
+    "configurePresets": [
+        {
+            "name": "dev",
+            "description": "Development configuration",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "AO_ENABLE_CUSTOM_INSTALL": "ON",
+                "AO_ENABLE_DEBUG_MODE": "ON",
+                "AO_CUSTOM_INSTALL_PATH": "/Users/maxwerner/Documents/ActiveObject/lib/ActiveObject"
+            },
+            "binaryDir": "${sourceDir}/build/dev"
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "dev",
+            "configurePreset": "dev"
+        }
+    ]
+}
