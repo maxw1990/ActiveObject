@@ -148,6 +148,10 @@ void ActiveObject::run() {
         *this,
         [msg](){
             return msg->execute();
+            // Fulfill the promise if applicable
+            if (msg->hasPromise()) {
+                msg->fulfillPromise();
+            }
         });
 
         lock.lock();

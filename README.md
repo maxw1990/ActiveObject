@@ -48,15 +48,71 @@ int result;
 };
 ```
 
+or use a future class
+
+```cpp
+template<typename T>
+class FutureMessage : public Message {
+public:
+    FutureMessage(std::function<T()> task)
+        : task(std::move(task)), promise(std::make_shared<std::promise<T>>()) {}
+
+    bool execute() override {
+        try {
+            T result = task();
+            promise->set_value(result);
+        } catch (...) {
+            promise->set_exception(std::current_exception());
+        }
+        return true;
+    }
+
+    std::future<T> getFuture() {
+        return promise->get_future();
+    }
+
+    bool hasPromise() const override { return true; }
+
+private:
+    std::function<T()> task;
+    std::shared_ptr<std::promise<T>> promise;
+};
+```
+
+and use it like this:
+
+```cpp
+ActiveObject ao;
+
+auto message = std::make_shared<FutureMessage<int>>(
+    []() -> int {
+        // Task logic here
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+        return 42; // Example result
+    });
+
+std::future<int> result = message->getFuture();
+ao.send(message);
+
+// Later...
+int value = result.get(); // Blocks until the result is available
+std::cout << "Result: " << value << std::endl;
+```
+
 ## cmake config
 
 configure Project with dev config by choosing dev from the drop down menu.
 Or manually by using the flags:
-
 
 ```cmake
 -DCMAKE_BUILD_TYPE=Debug 
 -DAO_ENABLE_CUSTOM_INSTALL=ON 
 -DAO_ENABLE_DEBUG_MODE=ON 
 -DAO_CUSTOM_INSTALL_PATH=CustomPath
+```
+
+or by the defined makefile:
+
+```bash
+make PRESET=debug
 ```
