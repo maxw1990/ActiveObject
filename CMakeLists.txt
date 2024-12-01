@@ -74,11 +74,6 @@ install(TARGETS ActiveObject
         DESTINATION ${INSTALL_LIB_DIR}
         EXPORT ${PROJECT_NAME}Targets)
 
-install(EXPORT ${PROJECT_NAME}Targets
-        FILE ${PROJECT_NAME}Targets.cmake
-        NAMESPACE ActiveObject::
-        DESTINATION ${INSTALL_CMAKE_DIR})
-
 # Create a ConfigVersion.cmake file
 include(CMakePackageConfigHelpers)
 write_basic_package_version_file(
@@ -100,6 +95,14 @@ install(FILES
   DESTINATION ${INSTALL_CMAKE_DIR}
 )
 
+install(EXPORT ${PROJECT_NAME}Targets
+        FILE ${PROJECT_NAME}Targets.cmake
+        NAMESPACE ActiveObject::
+        DESTINATION ${INSTALL_CMAKE_DIR})
+
 # Install header files
 install(FILES ActiveObject.h IMessage.h DESTINATION ${INSTALL_INCLUDE_DIR})
 install(FILES ActiveObjectPool.h DESTINATION ${INSTALL_INCLUDE_DIR}/Pool)
+
+# For FetchContent compatibility
+export(EXPORT ${PROJECT_NAME}Targets FILE ${PROJECT_NAME}Targets.cmake NAMESPACE ActiveObject::)

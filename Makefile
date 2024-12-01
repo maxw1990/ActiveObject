@@ -20,7 +20,7 @@ configure:
 build:
 	cmake --build --preset=$(BUILD_PRESET)
 
-install: build
+install:
 	cd build/dev; \
     cmake --install .
 
