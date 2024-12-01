@@ -105,4 +105,6 @@ install(FILES ActiveObject.h IMessage.h DESTINATION ${INSTALL_INCLUDE_DIR})
 install(FILES ActiveObjectPool.h DESTINATION ${INSTALL_INCLUDE_DIR}/Pool)
 
 # For FetchContent compatibility
-export(EXPORT ${PROJECT_NAME}Targets FILE ${PROJECT_NAME}Targets.cmake NAMESPACE ActiveObject::)
+export(EXPORT ${PROJECT_NAME}Targets
+       NAMESPACE ActiveObject::
+       FILE ${PROJECT_NAME}Targets.cmake)
