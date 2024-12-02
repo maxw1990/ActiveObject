@@ -116,3 +116,54 @@ or by the defined makefile:
 ```bash
 make PRESET=debug
 ```
+
+## Use in other projects
+
+### With find_package:
+
+- first go into downloaded git repo.
+- then build: make build
+- then: make install
+
+This will install the project on user/local (Mac)
+
+Now you can include the project via:
+
+```Cmake
+set(CMAKE_PREFIX_PATH ${CMAKE_CURRENT_SOURCE_DIR}/lib/ActiveObject ${CMAKE_PREFIX_PATH})
+
+find_package(ActiveObject 0.0.1 REQUIRED)
+
+# Link the MyLib library
+target_link_libraries(MyApp PRIVATE ActiveObject::ActiveObject)
+```
+
+#### Include dirs
+
+```c++
+#include<Pool/ActiveObjectPool.h>
+#include<ActiveObject.h>
+```
+
+
+### FetchContent
+
+```Cmake
+# Include FetchContent module
+include(FetchContent)
+
+# Fetch the library
+FetchContent_Declare(
+    ActiveObject
+    GIT_REPOSITORY https://github.com/maxw1990/ActiveObject.git
+    GIT_TAG        main
+)
+FetchContent_MakeAvailable(ActiveObject)
+
+target_link_libraries(MyApp PRIVATE ActiveObject::ActiveObject)
+```
+
+```c++
+#include<ActiveObjectPool.h>
+#include<ActiveObject.h>
+```
