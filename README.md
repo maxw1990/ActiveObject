@@ -104,7 +104,7 @@ std::cout << "Result: " << value << std::endl;
 configure Project with dev config by choosing dev from the drop down menu.
 Or manually by using the flags:
 
-```cmake
+```shell
 -DCMAKE_BUILD_TYPE=Debug 
 -DAO_ENABLE_CUSTOM_INSTALL=ON 
 -DAO_ENABLE_DEBUG_MODE=ON 
@@ -126,6 +126,13 @@ make PRESET=debug
 - then: make install
 
 This will install the project on user/local (Mac)
+If you want to install it in a local folder you have to set the flags:
+
+```shell
+-DAO_ENABLE_CUSTOM_INSTALL=ON
+-DAO_CUSTOM_INSTALL_PATH=<Path/To/Lib>
+```
+
 
 Now you can include the project via:
 
