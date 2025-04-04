@@ -171,6 +171,6 @@ target_link_libraries(MyApp PRIVATE ActiveObject::ActiveObject)
 ```
 
 ```c++
-#include<ActiveObjectPool.h>
+#include<Pool/ActiveObjectPool.h>
 #include<ActiveObject.h>
 ```

@@ -15,9 +15,9 @@ set(SOURCES
 )
 
 set(HEADERS
-ActiveObject.h
-IMessage.h
-ActiveObjectPool.h
+include/ActiveObject.h
+include/IMessage.h
+include/Pool/ActiveObjectPool.h
 )
 
 # Erstelle eine statische Bibliothek
@@ -43,11 +43,9 @@ set(cmake_dest "lib/cmake/${PROJECT_NAME}-${PROJECT_VERSION}")
 
 # Specify the include directories
 target_include_directories(ActiveObject PUBLIC
-                           $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
+                           $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
                            $<INSTALL_INTERFACE:${include_dest}>)
 
-# Setze das Zielverzeichnis für die Bibliotheken
-set_target_properties(ActiveObject PROPERTIES OUTPUT_NAME "ActiveObject")
 
 if(AO_ENABLE_CUSTOM_INSTALL)
   set(CMAKE_INSTALL_PREFIX ${AO_CUSTOM_INSTALL_PATH} CACHE PATH "Installation Directory" FORCE)
@@ -70,7 +68,7 @@ message(STATUS "INSTALL_CMAKE_DIR: ${INSTALL_CMAKE_DIR}")
 
 include(GNUInstallDirs)
 # Installationsregeln
-install(TARGETS ActiveObject
+install(TARGETS ${PROJECT_NAME}
         DESTINATION ${INSTALL_LIB_DIR}
         EXPORT ${PROJECT_NAME}Targets)
 
@@ -97,14 +95,14 @@ install(FILES
 
 install(EXPORT ${PROJECT_NAME}Targets
         FILE ${PROJECT_NAME}Targets.cmake
-        NAMESPACE ActiveObject::
+        NAMESPACE ${PROJECT_NAME}::
         DESTINATION ${INSTALL_CMAKE_DIR})
 
 # Install header files
-install(FILES ActiveObject.h IMessage.h DESTINATION ${INSTALL_INCLUDE_DIR})
-install(FILES ActiveObjectPool.h DESTINATION ${INSTALL_INCLUDE_DIR}/Pool)
+install(FILES include/ActiveObject.h include/IMessage.h DESTINATION ${INSTALL_INCLUDE_DIR})
+install(FILES include/Pool/ActiveObjectPool.h DESTINATION ${INSTALL_INCLUDE_DIR}/Pool)
 
 # For FetchContent compatibility
 export(EXPORT ${PROJECT_NAME}Targets
-       NAMESPACE ActiveObject::
+       NAMESPACE ${PROJECT_NAME}::
        FILE ${PROJECT_NAME}Targets.cmake)

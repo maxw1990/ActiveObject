@@ -71,7 +71,7 @@ void ActiveObject::send(std::shared_ptr<Message> msg) {
 void ActiveObject::WaitAndStop() {
     std::unique_lock<std::mutex> lock(mutex);
     #ifndef NDEBUG
-    printf("Object Waiting...%i\n", getThreadID());
+    printf("Object Waiting...%i\n",  this->getThreadID());
     #endif
 
     condition.wait(lock, [this]{ return messages.empty();});
@@ -131,7 +131,7 @@ void ActiveObject::run() {
     while (running) {
         std::unique_lock<std::mutex> lock(mutex);
         #ifndef NDEBUG
-        printf("Object Waiting...%i\n", getThreadID());
+        printf("Object running...%i\n", this->getThreadID());
         #endif
         condition.wait(lock, [this] { return !messages.empty() || !running; });
         #ifndef NDEBUG
