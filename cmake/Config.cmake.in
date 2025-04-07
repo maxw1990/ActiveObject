@@ -4,4 +4,4 @@ get_filename_component(SELF_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
 include(${SELF_DIR}/@PROJECT_NAME@Targets.cmake)
 
 # Provide the target to find_package consumers
-set(ActiveObject_DIR "${SELF_DIR}")
+set(@PROJECT_NAME_DIR "${SELF_DIR}")
