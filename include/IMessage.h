@@ -1,5 +1,5 @@
 #pragma once
-// Nachrichtenklasse
+// message class
 class Message {
 public:
     virtual bool execute() = 0;

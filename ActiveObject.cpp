@@ -37,7 +37,7 @@ ActiveObject::~ActiveObject(){
                     pthread_cancel(thread.native_handle()) == 0 ? true : false;
                 }
 
-                // Der Thread darf nicht mehr joinable sein wenn sein Destruktor aufgerufen wird.
+                // thread not allowed to be joinable
                 thread.join();
             }
         }
@@ -51,11 +51,11 @@ ActiveObject::~ActiveObject(){
     catch(...)
     {
         assert(0);
-        // Am Programmende kann es passieren, dass der Thread schon abgeräumt wurde.
-        // Der Handle in m_thread.native_handle() ist dann nicht mehr gültig. Die
-        // API-Threadmethoden können wegen ungültigen Handles Exceptions schmeißen. Die
-        // Exceptions müssen abgefangen werden und die Zerstörung des Threads kann gestoppt
-        // werden, da das Betriebssystem sich sowieso schon darum gekümmert hat.
+        // At the end of the program, it can happen that the thread has already been cleaned up.
+        // The handle in m_thread.native_handle() is then no longer valid. The
+        // API thread methods can throw exceptions due to the invalid handle.
+        // These exceptions must be caught, and the destruction of the thread can be skipped,
+        // because the operating system has already taken care of it anyway.
     }
 };
 
@@ -99,15 +99,13 @@ class TaskHelper
 public:
     /*=============================================================================*/
     /**
-        Führt die gegebene Lambda-Expression aus und behandelt allfällige
-        Exceptions. Im Falle einer Exception wird der Exception-Handler
-        \c onException auf dem gegebenen Task aufgerufen.
+        Calling function and is doing exception handling.
 
-        @param bCondition	Bestimmt, ob die Lambda-Expression ausgeführt werden soll
-        @param rTask		Referenz auf einen Task
-        @param function		Die auszuführende Lambda-Expression
-        @return				Erfolgsstatus
-        @author				Cyfex AG, Marco Nef
+        @param bCondition	expression called
+        @param obj		    active object
+        @param function		function
+        @return				succes state
+        @author				M. Werner
     */
     /*=============================================================================*/
         template<typename FunctionType>

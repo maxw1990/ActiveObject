@@ -6,15 +6,15 @@
 #include <thread>
 #include <queue>
 
-// Aktives Objekt
+// Active object
 class ActiveObject {
 public:
     ActiveObject();
     ~ActiveObject();
-    // Nachricht senden
+    // send message
     void send(std::shared_ptr<Message> msg);
 
-    // Aktives Objekt beenden
+    // stop active object and wait
     void WaitAndStop();
     
     bool isActive() const;
