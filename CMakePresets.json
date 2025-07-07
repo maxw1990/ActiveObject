@@ -13,7 +13,7 @@
                 "CMAKE_BUILD_TYPE": "Debug",
                 "AO_ENABLE_CUSTOM_INSTALL": "ON",
                 "AO_ENABLE_DEBUG_MODE": "ON",
-                "AO_CUSTOM_INSTALL_PATH": "/Users/maxwerner/Documents/ActiveObject/lib/ActiveObject"
+                "AO_CUSTOM_INSTALL_PATH": "/Users/path/to/ActiveObject/lib/ActiveObject"
             },
             "binaryDir": "${sourceDir}/build/dev"
         },
@@ -24,7 +24,7 @@
                 "CMAKE_BUILD_TYPE": "Release",
                 "AO_ENABLE_CUSTOM_INSTALL": "ON",
                 "AO_ENABLE_DEBUG_MODE": "ON",
-                "AO_CUSTOM_INSTALL_PATH": "/Users/maxwerner/Documents/ActiveObject/lib/ActiveObject"
+                "AO_CUSTOM_INSTALL_PATH": "/Users/path/to/ActiveObject/lib/ActiveObject"
             },
             "binaryDir": "${sourceDir}/build/dev"
         }
