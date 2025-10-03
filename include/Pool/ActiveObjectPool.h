@@ -9,6 +9,8 @@ public:
 
     void sendMessage(std::shared_ptr<Message> msg);
 
+    bool isActive() const;
+
     void WaitAndstopAll();
 
 private:

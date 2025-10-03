@@ -42,6 +42,10 @@ ActiveObjectPool::ActiveObjectPool():thread(&ActiveObjectPool::run, this),runnin
     }
 }
 
+bool ActiveObjectPool::isActive() const{
+    return this->running;
+};
+
 void ActiveObjectPool::run() {
     while (running) {
         std::unique_lock<std::mutex> lock(mutex);
@@ -63,7 +67,7 @@ void ActiveObjectPool::run() {
         else{
             while(m_IdleObjectQueue.empty()){
                 for(auto obj : objects){
-                    if(obj->isActive()){
+                    if(!obj->isActive()){
                         #ifndef __NDEBUG__
                         printf("object ready %i \n",obj->getThreadID());
                         #endif

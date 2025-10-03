@@ -47,6 +47,21 @@ target_include_directories(ActiveObject PUBLIC
                            $<INSTALL_INTERFACE:${include_dest}>)
 
 
+if(CMAKE_BUILD_TYPE STREQUAL "Debug" OR (DEFINED CMAKE_CONFIGURATION_TYPES AND "Debug" IN_LIST CMAKE_CONFIGURATION_TYPES))
+  include(FetchContent)
+
+  FetchContent_Declare(
+  catch2
+  GIT_REPOSITORY https://github.com/catchorg/Catch2.git
+  GIT_TAG v3.6.0 # choose a stable version
+  )
+
+  FetchContent_MakeAvailable(catch2)
+  enable_testing()
+  add_subdirectory(tests)
+endif()
+
+#install
 if(AO_ENABLE_CUSTOM_INSTALL)
   set(CMAKE_INSTALL_PREFIX ${AO_CUSTOM_INSTALL_PATH} CACHE PATH "Installation Directory" FORCE)
 endif()
@@ -99,8 +114,11 @@ install(EXPORT ${PROJECT_NAME}Targets
         DESTINATION ${INSTALL_CMAKE_DIR})
 
 # Install header files
-install(FILES include/ActiveObject.h include/IMessage.h DESTINATION ${INSTALL_INCLUDE_DIR})
-install(FILES include/Pool/ActiveObjectPool.h DESTINATION ${INSTALL_INCLUDE_DIR}/Pool)
+install(
+    DIRECTORY include/
+    DESTINATION ${INSTALL_INCLUDE_DIR}
+    FILES_MATCHING PATTERN "*.h"
+)
 
 # For FetchContent compatibility
 export(EXPORT ${PROJECT_NAME}Targets

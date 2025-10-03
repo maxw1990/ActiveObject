@@ -16,8 +16,15 @@ ActiveObject::ActiveObject() :
 ActiveObject::~ActiveObject(){
     try
     {
-        if(running)
+        if(running && thread.joinable()) {
+            // Just stop the thread safely
+            running = false;
+            condition.notify_one();
+            thread.join();
+        }
+        else if(running && !thread.joinable())
         {
+            running = false;   // stop immediately
             // This instance of this thread class is delete before the
             // corresponding thread function has finished.
             // This is an exceptional situation and should not happen.
@@ -40,12 +47,6 @@ ActiveObject::~ActiveObject(){
                 // thread not allowed to be joinable
                 thread.join();
             }
-        }
-        else if(thread.joinable())
-        {
-            // Only join if the thread is joinable because the std::thread may already
-            // have been joined (indirectly) in a subclass
-            thread.join();
         }
     }
     catch(...)
