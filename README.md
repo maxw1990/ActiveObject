@@ -119,7 +119,7 @@ make PRESET=debug
 
 ## Use in other projects
 
-### With find_package:
+### With find_package
 
 - first go into downloaded git repo.
 - then build: make build
@@ -132,7 +132,6 @@ If you want to install it in a local folder you have to set the flags:
 -DAO_ENABLE_CUSTOM_INSTALL=ON
 -DAO_CUSTOM_INSTALL_PATH=<Path/To/Lib>
 ```
-
 
 Now you can include the project via:
 
@@ -151,7 +150,6 @@ target_link_libraries(MyApp PRIVATE ActiveObject::ActiveObject)
 #include<Pool/ActiveObjectPool.h>
 #include<ActiveObject.h>
 ```
-
 
 ### FetchContent
 

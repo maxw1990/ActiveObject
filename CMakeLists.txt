@@ -26,12 +26,10 @@ add_library(${PROJECT_NAME} STATIC ${SOURCES} ${HEADERS})
 # Define options
 option(AO_ENABLE_CUSTOM_INSTALL "Enable feature X" OFF)
 option(AO_ENABLE_DEBUG_MODE "Enable debug mode" OFF)
-set(AO_CUSTOM_INSTALL_PATH "/usr/local" CACHE PATH "Custom install path")
 
 # Print the options
 message(STATUS "Enable Custom install Path: ${AO_ENABLE_CUSTOM_INSTALL}")
 message(STATUS "Enable Debug Mode: ${AO_ENABLE_DEBUG_MODE}")
-message(STATUS "Custom Install Path: ${AO_CUSTOM_INSTALL_PATH}")
 
 set(bin_dest "bin")
 set(include_dest "include/${PROJECT_NAME}-${PROJECT_VERSION}")
@@ -61,20 +59,22 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug" OR (DEFINED CMAKE_CONFIGURATION_TYPES AND "
   add_subdirectory(tests)
 endif()
 
-#install
+
+# Determine base install root
 if(AO_ENABLE_CUSTOM_INSTALL)
-  set(CMAKE_INSTALL_PREFIX ${AO_CUSTOM_INSTALL_PATH} CACHE PATH "Installation Directory" FORCE)
+  set(AO_INSTALL_ROOT "${AO_CUSTOM_INSTALL_PATH}")
+else()
+  set(AO_INSTALL_ROOT "${CMAKE_INSTALL_PREFIX}")
 endif()
 
-# Set the installation directories
-set(INSTALL_BIN_DIR "${CMAKE_INSTALL_PREFIX}/${bin_dest}")
-set(INSTALL_LIB_DIR "${CMAKE_INSTALL_PREFIX}/${lib_dest}")
-set(INSTALL_INCLUDE_DIR "${CMAKE_INSTALL_PREFIX}/${include_dest}")
-set(INSTALL_CMAKE_DIR "${CMAKE_INSTALL_PREFIX}/${cmake_dest}")
-set(INSTALL_SHARE_DIR "${CMAKE_INSTALL_PREFIX}/share")
+# Define install destinations relative to that root
+set(INSTALL_BIN_DIR "${AO_INSTALL_ROOT}/${bin_dest}")
+set(INSTALL_LIB_DIR "${AO_INSTALL_ROOT}/${lib_dest}")
+set(INSTALL_INCLUDE_DIR "${AO_INSTALL_ROOT}/${include_dest}")
+set(INSTALL_CMAKE_DIR "${AO_INSTALL_ROOT}/${cmake_dest}")
+set(INSTALL_SHARE_DIR "${AO_INSTALL_ROOT}/share")
 
 # Output various CMake variables and custom paths
-message(STATUS "CMAKE_INSTALL_PREFIX: ${CMAKE_INSTALL_PREFIX}")
 message(STATUS "INSTALL_LIB_DIR: ${INSTALL_LIB_DIR}")
 message(STATUS "CMAKE_BINARY_DIR: ${CMAKE_BINARY_DIR}")
 message(STATUS "CMAKE CURRENT BIN: ${CMAKE_CURRENT_BINARY_DIR}")
