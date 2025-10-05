@@ -26,6 +26,7 @@ add_library(${PROJECT_NAME} STATIC ${SOURCES} ${HEADERS})
 # Define options
 option(AO_ENABLE_CUSTOM_INSTALL "Enable feature X" OFF)
 option(AO_ENABLE_DEBUG_MODE "Enable debug mode" OFF)
+set(AO_CUSTOM_INSTALL_PATH "/usr/local" CACHE PATH "Custom install path")
 
 # Print the options
 message(STATUS "Enable Custom install Path: ${AO_ENABLE_CUSTOM_INSTALL}")
@@ -58,7 +59,6 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug" OR (DEFINED CMAKE_CONFIGURATION_TYPES AND "
   enable_testing()
   add_subdirectory(tests)
 endif()
-
 
 # Determine base install root
 if(AO_ENABLE_CUSTOM_INSTALL)
