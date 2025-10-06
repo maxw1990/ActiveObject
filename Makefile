@@ -26,3 +26,14 @@ install:
 
 clean:
 	rm -rf build
+
+find-pkg:
+	cmake --preset=debug; \
+	cmake --build --preset=Debug; \
+	cd build/dev; \
+	cmake --install .; \
+	cd ../..; \
+	cd tests/find_package_test; \
+	cmake --preset=debug; \
+	cd tests/find_package_test; \
+	cmake --build --preset=Debug;

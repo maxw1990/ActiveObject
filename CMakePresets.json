@@ -11,9 +11,7 @@
             "description": "Development configuration",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug",
-                "AO_ENABLE_CUSTOM_INSTALL": "ON",
-                "AO_ENABLE_DEBUG_MODE": "ON",
-                "AO_CUSTOM_INSTALL_PATH": "/Users/path/to/ActiveObject/lib/ActiveObject"
+                "CMAKE_INSTALL_PREFIX": "/Users/path/to/ActiveObject/lib/ActiveObject"
             },
             "binaryDir": "${sourceDir}/build/dev"
         },
@@ -22,9 +20,7 @@
             "description": "Release configuration",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Release",
-                "AO_ENABLE_CUSTOM_INSTALL": "ON",
-                "AO_ENABLE_DEBUG_MODE": "ON",
-                "AO_CUSTOM_INSTALL_PATH": "/Users/path/to/ActiveObject/lib/ActiveObject"
+                "CMAKE_INSTALL_PREFIX": "/Users/path/to/ActiveObject/lib/ActiveObject"
             },
             "binaryDir": "${sourceDir}/build/dev"
         }

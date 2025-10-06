@@ -23,14 +23,8 @@ include/Pool/ActiveObjectPool.h
 # Erstelle eine statische Bibliothek
 add_library(${PROJECT_NAME} STATIC ${SOURCES} ${HEADERS})
 
-# Define options
-option(AO_ENABLE_CUSTOM_INSTALL "Enable feature X" OFF)
-option(AO_ENABLE_DEBUG_MODE "Enable debug mode" OFF)
-set(AO_CUSTOM_INSTALL_PATH "/usr/local" CACHE PATH "Custom install path")
-
 # Print the options
 message(STATUS "Enable Custom install Path: ${AO_ENABLE_CUSTOM_INSTALL}")
-message(STATUS "Enable Debug Mode: ${AO_ENABLE_DEBUG_MODE}")
 
 set(bin_dest "bin")
 set(include_dest "include/${PROJECT_NAME}-${PROJECT_VERSION}")
@@ -60,19 +54,12 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug" OR (DEFINED CMAKE_CONFIGURATION_TYPES AND "
   add_subdirectory(tests)
 endif()
 
-# Determine base install root
-if(AO_ENABLE_CUSTOM_INSTALL)
-  set(AO_INSTALL_ROOT "${AO_CUSTOM_INSTALL_PATH}")
-else()
-  set(AO_INSTALL_ROOT "${CMAKE_INSTALL_PREFIX}")
-endif()
-
 # Define install destinations relative to that root
-set(INSTALL_BIN_DIR "${AO_INSTALL_ROOT}/${bin_dest}")
-set(INSTALL_LIB_DIR "${AO_INSTALL_ROOT}/${lib_dest}")
-set(INSTALL_INCLUDE_DIR "${AO_INSTALL_ROOT}/${include_dest}")
-set(INSTALL_CMAKE_DIR "${AO_INSTALL_ROOT}/${cmake_dest}")
-set(INSTALL_SHARE_DIR "${AO_INSTALL_ROOT}/share")
+set(INSTALL_BIN_DIR "${CMAKE_INSTALL_PREFIX}/${bin_dest}")
+set(INSTALL_LIB_DIR "${CMAKE_INSTALL_PREFIX}/${lib_dest}")
+set(INSTALL_INCLUDE_DIR "${CMAKE_INSTALL_PREFIX}/${include_dest}")
+set(INSTALL_CMAKE_DIR "${CMAKE_INSTALL_PREFIX}/${cmake_dest}")
+set(INSTALL_SHARE_DIR "${CMAKE_INSTALL_PREFIX}/share")
 
 # Output various CMake variables and custom paths
 message(STATUS "INSTALL_LIB_DIR: ${INSTALL_LIB_DIR}")
