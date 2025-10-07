@@ -23,9 +23,6 @@ include/Pool/ActiveObjectPool.h
 # Erstelle eine statische Bibliothek
 add_library(${PROJECT_NAME} STATIC ${SOURCES} ${HEADERS})
 
-# Print the options
-message(STATUS "Enable Custom install Path: ${AO_ENABLE_CUSTOM_INSTALL}")
-
 set(bin_dest "bin")
 set(include_dest "include/${PROJECT_NAME}-${PROJECT_VERSION}")
 set(lib_dest "lib/${PROJECT_NAME}-${PROJECT_VERSION}")

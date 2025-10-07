@@ -11,7 +11,8 @@
             "description": "Development configuration",
             "binaryDir": "${sourceDir}/build/dev",
             "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Debug"
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_CXX_COMPILER": "/usr/bin/clang++"
             }
         }
     ],

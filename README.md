@@ -106,9 +106,7 @@ Or manually by using the flags:
 
 ```shell
 -DCMAKE_BUILD_TYPE=Debug 
--DAO_ENABLE_CUSTOM_INSTALL=ON 
--DAO_ENABLE_DEBUG_MODE=ON 
--DAO_CUSTOM_INSTALL_PATH=CustomPath
+-DCMAKE_INSTALL_PREFIX==CustomPath
 ```
 
 or by the defined makefile:
@@ -129,14 +127,13 @@ This will install the project on user/local (Mac)
 If you want to install it in a local folder you have to set the flags:
 
 ```shell
--DAO_ENABLE_CUSTOM_INSTALL=ON
--DAO_CUSTOM_INSTALL_PATH=<Path/To/Lib>
+-DCMAKE_INSTALL_PREFIX==CustomPath
 ```
 
 Now you can include the project via:
 
 ```Cmake
-set(CMAKE_PREFIX_PATH ${CMAKE_CURRENT_SOURCE_DIR}/lib/ActiveObject ${CMAKE_PREFIX_PATH})
+set(CMAKE_PREFIX_PATH ${CMAKE_CURRENT_SOURCE_DIR}/lib/yourLibFolder ${CMAKE_PREFIX_PATH})
 
 find_package(ActiveObject 0.0.1 REQUIRED)
 

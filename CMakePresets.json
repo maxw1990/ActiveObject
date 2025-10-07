@@ -11,6 +11,8 @@
             "description": "Development configuration",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_C_COMPILER": "/usr/bin/clang",
+                "CMAKE_CXX_COMPILER": "/usr/bin/clang++",
                 "CMAKE_INSTALL_PREFIX": "/Users/path/to/ActiveObject/lib/ActiveObject"
             },
             "binaryDir": "${sourceDir}/build/dev"
@@ -20,6 +22,8 @@
             "description": "Release configuration",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Release",
+                "CMAKE_C_COMPILER": "/usr/bin/clang",
+                "CMAKE_CXX_COMPILER": "/usr/bin/clang++",
                 "CMAKE_INSTALL_PREFIX": "/Users/path/to/ActiveObject/lib/ActiveObject"
             },
             "binaryDir": "${sourceDir}/build/dev"

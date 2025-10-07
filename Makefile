@@ -27,7 +27,7 @@ install:
 clean:
 	rm -rf build
 
-find-pkg:
+test-find-pkg:
 	cmake --preset=debug; \
 	cmake --build --preset=Debug; \
 	cd build/dev; \
