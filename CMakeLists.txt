@@ -23,6 +23,9 @@ include/Pool/ActiveObjectPool.h
 # Erstelle eine statische Bibliothek
 add_library(${PROJECT_NAME} STATIC ${SOURCES} ${HEADERS})
 
+# 👇 Add this alias line
+add_library(ActiveObject::ActiveObject ALIAS ActiveObject)
+
 set(bin_dest "bin")
 set(include_dest "include/${PROJECT_NAME}-${PROJECT_VERSION}")
 set(lib_dest "lib/${PROJECT_NAME}-${PROJECT_VERSION}")
