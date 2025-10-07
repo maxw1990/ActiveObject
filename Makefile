@@ -37,3 +37,10 @@ test-find-pkg:
 	cmake --preset=debug; \
 	cd tests/find_package_test; \
 	cmake --build --preset=Debug;
+
+test-fetch-content:
+	cd tests/fetch_content_test; \
+	cmake --preset=debug; \
+	cd tests/fetch_content_test; \
+	cmake --build --preset=Debug;
+

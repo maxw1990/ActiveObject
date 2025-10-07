@@ -158,7 +158,7 @@ include(FetchContent)
 FetchContent_Declare(
     ActiveObject
     GIT_REPOSITORY https://github.com/maxw1990/ActiveObject.git
-    GIT_TAG        main
+    GIT_TAG        master
 )
 FetchContent_MakeAvailable(ActiveObject)
 
